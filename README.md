@@ -4,4 +4,4 @@ The agent is in ```./bots/s2opbot/agent.py```. The agent simply calls the most r
 \
 Tensorboard files for training runs are at ```./s2opbot_training/```. The directory is split into subdirectories representing the early training with a shaped reward and the later training with a zero sum reward. Code for these custom rewards is in ```./TensorRTS.py```. \
 \
-Thanks to the given [ENN implementation](https://github.com/drchangliu/RL4SE/tree/main/enn/TensorRTS) for giving the framework for this project.
+Thanks to the given [ENN implementation](https://github.com/drchangliu/RL4SE/tree/main/enn/TensorRTS) for giving the framework for this project and [James Pennington's README](https://github.com/jp013718/TensorRTS_Selfplay/tree/main) for giving insight into beginning training.
