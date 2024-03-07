@@ -32,6 +32,7 @@ LinearRTS, the first epoch of TensorRTS, is intended to be the simplest RTS game
         self.clusters: List[List[int]] = []  # The inner list has a size of 2 (position, number of dots).
         self.tensors: List[List[int ]] = [] # The inner list has a size of 4 (position, dimension, x, y).
         self.seed2 = random.randint(1, 3)
+        self.is_p_two = False
         
         if self.enable_printouts:
             print(f"LinearRTS -- Seed2: {self.seed2}")
@@ -81,33 +82,33 @@ LinearRTS, the first epoch of TensorRTS, is intended to be the simplest RTS game
     def observe(self) -> Observation:
         done = self.tensors[0][0] >= self.tensors[1][0]
         if done:
-            reward = 10 if self.tensor_power(0) > self.tensor_power(1) else 0 if self.tensor_power(0) == self.tensor_power(1) else -10
+            reward = 25 if self.tensor_power(0) > self.tensor_power(1) else 0 if self.tensor_power(0) == self.tensor_power(1) else -25
         else:
             reward = 0
             #Shaped reward for early training
             
-            for cluster in self.clusters:
-                if (self.tensors[0][0] - cluster[0] < 3 and self.tensors[0][0] - cluster[0] > -3):
-                    reward += 0.01 * cluster[1]
-                elif (self.tensors[0][0] - cluster[0] < 2 and self.tensors[0][0] - cluster[0] > -2):
-                    reward += 0.02 * cluster[1]
-            reward += (min(20,(0.05 * self.tensors[0][2]) + (0.15 * self.tensors[0][3])))
-            # Factor in whether the tensor is in danger (opponent is close and has more power) or has advantage (opponent is close and has less power)
-            if self.tensors[1][0] - self.tensors[0][0] < 2 and self.tensors[1][0] - self.tensors[0][0] > -2:
-                if self.tensor_power(1) > self.tensor_power(0):
-                    reward -= 2.5
-                elif self.tensor_power(1) < self.tensor_power(0):
-                    reward += 2.5
-            elif self.tensors[1][0] - self.tensors[0][0] < 3 and self.tensors[1][0] - self.tensors[0][0] > -3:
-                if self.tensor_power(1) > self.tensor_power(0):
-                    reward -= 1
-                elif self.tensor_power(1) < self.tensor_power(0):
-                    reward += 1
-            elif self.tensors[1][0] - self.tensors[0][0] < 4 and self.tensors[1][0] - self.tensors[0][0] > -4:
-                if self.tensor_power(1) > self.tensor_power(0):
-                    reward -= 0.5
-                elif self.tensor_power(1) < self.tensor_power(0):
-                    reward += 0.5
+            # for cluster in self.clusters:
+            #     if (self.tensors[0][0] - cluster[0] < 3 and self.tensors[0][0] - cluster[0] > -3):
+            #         reward += 0.01 * cluster[1]
+            #     elif (self.tensors[0][0] - cluster[0] < 2 and self.tensors[0][0] - cluster[0] > -2):
+            #         reward += 0.02 * cluster[1]
+            # reward += min(20,((0.05 * self.tensors[0][2]) + (0.15 * self.tensors[0][3])))
+            # # Factor in whether the tensor is in danger (opponent is close and has more power) or has advantage (opponent is close and has less power)
+            # if self.tensors[1][0] - self.tensors[0][0] < 2 and self.tensors[1][0] - self.tensors[0][0] > -2:
+            #     if self.tensor_power(1) > self.tensor_power(0):
+            #         reward -= 5
+            #     elif self.tensor_power(1) < self.tensor_power(0):
+            #         reward += 5
+            # elif self.tensors[1][0] - self.tensors[0][0] < 3 and self.tensors[1][0] - self.tensors[0][0] > -3:
+            #     if self.tensor_power(1) > self.tensor_power(0):
+            #         reward -= 2.5
+            #     elif self.tensor_power(1) < self.tensor_power(0):
+            #         reward += 2.5
+            # elif self.tensors[1][0] - self.tensors[0][0] < 4 and self.tensors[1][0] - self.tensors[0][0] > -4:
+            #     if self.tensor_power(1) > self.tensor_power(0):
+            #         reward -= 1
+            #     elif self.tensor_power(1) < self.tensor_power(0):
+            #         reward += 1
         return Observation(
             entities={
                 "Cluster": (
