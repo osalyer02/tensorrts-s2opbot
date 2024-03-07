@@ -16,19 +16,19 @@ class S2OPBot(Agent):
         move = self.current.act(observation)
         return move
     
-    def on_game_start(self) -> None:
-        return super().on_game_start()
+    def on_game_start(self, is_player_one : bool, is_player_two : bool) -> None:
+        return super().on_game_start(is_player_one, is_player_two)
     
     def on_game_over(self, did_i_win : bool, did_i_tie : bool) -> None:
         return super().on_game_over(did_i_win, did_i_tie)
     
-    def agent_hook(init_observation : Observation, action_space : Dict[ActionName, ActionSpace]) -> Agent: 
-        return S2OPBot(init_observation, action_space)
+def agent_hook(init_observation : Observation, action_space : Dict[ActionName, ActionSpace]) -> Agent: 
+    return S2OPBot(init_observation, action_space)
     
-    def student_name_hook() -> str: 
-        """Provide the name of the student as a string
+def student_name_hook() -> str: 
+    """Provide the name of the student as a string
 
-        Returns:
-            str: Name of student
-        """
-        return 'Owen Salyer'
+    Returns:
+        str: Name of student
+    """
+    return 'Owen Salyer'
