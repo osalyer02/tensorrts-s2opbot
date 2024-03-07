@@ -1,0 +1,38 @@
+State(
+    step: 98304,
+    restart: 0,
+    next_eval_step: None,
+    agent: "<blob:msgpack>",
+    value_function: None,
+    optimizer: "<blob:msgpack>",
+    vf_optimizer: None,
+    obs_space: ObsSpace(
+        global_features: [],
+        entities: {
+            "Cluster": Entity(
+                features: [
+                    "position",
+                    "dot",
+                ],
+            ),
+            "Tensor": Entity(
+                features: [
+                    "position",
+                    "dimension",
+                    "x",
+                    "y",
+                ],
+            ),
+        },
+    ),
+    action_space: {
+        "Move": GlobalCategoricalActionSpace(
+            index_to_label: [
+                "advance",
+                "retreat",
+                "rush",
+                "boom",
+            ],
+        ),
+    },
+)
