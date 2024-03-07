@@ -48,7 +48,7 @@ TrainConfig(
     vf_net: None,
     name: "config",
     seed: 1,
-    total_timesteps: 150000,
+    total_timesteps: 200000,
     max_train_time: None,
     torch_deterministic: true,
     cuda: true,
